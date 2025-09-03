@@ -9,6 +9,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+
+  void _login() {
+    String email = _emailController.text.trim();
+    String pass = _passController.text.trim();
+
+    if (email.isNotEmpty && pass.isNotEmpty) {
+      Navigator.pushReplacementNamed(context, '/ejercicios'); // 👉 va a EjerciciosPage
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Por favor ingresa email y contraseña")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,40 +35,36 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              //Imagen de logo
-              Image.asset('assets/Logo2_ordenRae.png', height: 150),
+              Image.asset('assets/logo2_ordenRae.png', height: 200),
               const SizedBox(height: 40),
-              //Campos de Email
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Correo electrónico',
+
+              TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.email),
                 ),
               ),
               const SizedBox(height: 20),
-              // Campo de Contraseña
-              const TextField(
+
+              TextField(
+                controller: _passController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Contraseña',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock),
                 ),
               ),
               const SizedBox(height: 20),
-              // Botón de Login
+
               ElevatedButton(
-                onPressed: () {
-                  // Lógica de Login
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Login exitoso')),
-                  );
-                },
+                onPressed: _login,
                 child: const Text('Entrar'),
               ),
               const SizedBox(height: 10),
-              // Botón para ir a Registro
+
               TextButton(
                 onPressed: () {
                   Navigator.push(
@@ -60,9 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(
                       builder: (context) => const RegisterPage(),
                     ),
-                  );  
+                  );
                 },
-                child: const Text('¿No tienes cuenta? Registrarse'),
+                child: const Text('¿No tienes cuenta? Regístrate'),
               ),
             ],
           ),

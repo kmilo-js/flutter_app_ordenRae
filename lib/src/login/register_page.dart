@@ -12,14 +12,15 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/Logo2_ordenRae.png", height: 120),
-            const SizedBox(height: 30),
+            Image.asset("assets/Logo2_ordenRae.png", height: 200),
+            const SizedBox(height: 40),
 
             // Campo usuario
             TextField(
               decoration: const InputDecoration(
                 labelText: "Usuario",
                 border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
               ),
             ),
             const SizedBox(height: 15),
@@ -29,6 +30,7 @@ class RegisterPage extends StatelessWidget {
               decoration: const InputDecoration(
                 labelText: "Correo",
                 border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.email),
               ),
             ),
             const SizedBox(height: 20),
